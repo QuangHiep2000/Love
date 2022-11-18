@@ -14,9 +14,6 @@
     </audio> -->
     <!-- 星空html -->
     <!-- <div> -->
-    <audio autoplay="autopaly" id="mySound">
-      <source src="audio.mp3" type="audio/mp3">
-    </audio>
     <div class="container2">
       <div class="content">
         <canvas id="universe"></canvas>
@@ -31,15 +28,14 @@
       <img class="img" src="picture1.jpg" alt="picture1" />
       <canvas id="pinkboard"></canvas>
     </div>
+    <script>
+      var audio = new Audio();
+      audio.src = "audio.mp3";
+      audio.play();
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/particle.js"></script>
     <script src="js/universe.js"></script>
-    <script>
-      var audio = new Audio('audio.mp3');
-      audio.play()
-      // audio = document.getElementById("mySound");
-      // audio.play()
-    </script>
   </body>
 </html>
