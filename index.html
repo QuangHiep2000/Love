@@ -1,41 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#05060f">
+    <title>Gửi em yêu ❤</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
   </head>
 
-  <body>
-    <!-- <audio autoplay="autopaly">
-      <source src="renxi.mp3" type="audio/mp3" />
-    </audio> -->
-    <!-- 星空html -->
-    <!-- <div> -->
-    <div class="container2">
-      <div class="content">
-        <canvas id="universe"></canvas>
-      </div>
+  <body class="is-locked">
+    <canvas id="sky"></canvas>
+    <canvas id="fx"></canvas>
+
+    <!-- Màn hình mở quà -->
+    <div id="intro" class="intro">
+      <button id="openBtn" class="intro__heart" aria-label="Mở quà" data-no-burst>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </button>
+      <p id="introTitle" class="intro__title"></p>
+      <p id="introHint" class="intro__hint"></p>
     </div>
-    <!-- </div> -->
-    <div class="title">
-      <!-- EDIT HERE -->
-      <!-- <h3 class="STARDUST1">2022</h3> -->
-      <h1 style="font-weight: 600;" class="STARDUST2">Quang Hiệp <strong style="color: #CB2020;">❤</strong> Mỹ Mỹ</h1>
-      <h1 style="font-weight: 500;" class="STARDUST3"> Been together</h1>
-      <img class="img" src="picture1.jpg" alt="picture1" />
-      <canvas id="pinkboard"></canvas>
-    </div>
-    <script>
-      var audio = new Audio();
-      audio.src = "audio.mp3";
-      audio.play();
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/particle.js"></script>
-    <script src="js/universe.js"></script>
+
+    <button id="musicBtn" class="music" aria-label="Bật/tắt nhạc" data-no-burst hidden>
+      <span class="music__disc">♪</span>
+    </button>
+
+    <main>
+      <section class="hero">
+        <div class="hero__stage">
+          <canvas id="pinkboard"></canvas>
+          <div class="hero__photo-wrap">
+            <img id="heroPhoto" class="hero__photo" alt="">
+          </div>
+        </div>
+        <h1 class="names"><span id="himName"></span> <span class="names__heart">❤</span> <span id="herName"></span></h1>
+        <p id="sinceLabel" class="since"></p>
+        <div class="counter">
+          <div class="counter__total"><span id="cTotal">0</span><small>ngày</small></div>
+          <div class="counter__grid">
+            <div><b id="cYears">0</b><span>năm</span></div>
+            <div><b id="cMonths">0</b><span>tháng</span></div>
+            <div><b id="cDays">0</b><span>ngày</span></div>
+            <div><b id="cHours">00</b><span>giờ</span></div>
+            <div><b id="cMinutes">00</b><span>phút</span></div>
+            <div><b id="cSeconds">00</b><span>giây</span></div>
+          </div>
+          <p id="nextAnni" class="counter__next"></p>
+        </div>
+        <a href="#letter" class="scroll-hint" aria-label="Kéo xuống"><span></span></a>
+      </section>
+
+      <section id="letter" class="section reveal">
+        <h2 id="letterTitle" class="section__title"></h2>
+        <div class="letter" id="letterPaper">
+          <div id="letterText"></div>
+          <p id="letterSign" class="letter__sign"></p>
+          <p class="letter__skip">Chạm để đọc nhanh</p>
+        </div>
+      </section>
+
+      <section id="memories" class="section reveal">
+        <h2 id="memoriesTitle" class="section__title"></h2>
+        <div id="polaroids" class="polaroids"></div>
+      </section>
+
+      <section class="section reveal">
+        <h2 id="reasonsTitle" class="section__title"></h2>
+        <p class="section__sub">Chạm vào từng thẻ nhé</p>
+        <div id="cards" class="cards"></div>
+      </section>
+
+      <section class="section finale reveal">
+        <h2 id="question" class="section__title"></h2>
+        <div class="finale__btns">
+          <button id="yesBtn" class="btn btn--yes" data-no-burst></button>
+          <button id="noBtn" class="btn btn--no" data-no-burst></button>
+        </div>
+        <p id="answer" class="finale__answer" hidden></p>
+      </section>
+
+      <footer id="footer" class="footer"></footer>
+    </main>
+
+    <div id="lightbox" class="lightbox" data-no-burst hidden><img alt=""></div>
+
+    <audio id="bgm" loop preload="auto"></audio>
+
+    <script src="js/config.js"></script>
+    <script src="js/sky.js"></script>
+    <script src="js/heart.js"></script>
+    <script src="js/fx.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
